@@ -88,6 +88,7 @@ public class Grid implements Iterable<Cell> {
         return numberOfColumns;
     }
 
+    //méthode getNeighbours; retourne une liste des 8 voisins de la cellule avec les coordonnées données en argument.
 
     private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
 
@@ -102,9 +103,17 @@ public class Grid implements Iterable<Cell> {
         return neighboursCells;
     }
 
-    // TODO: Écrire une version correcte de cette méthode.
+    // La méthode countAliveNeighbours renvoie le nombre de cellules vivantes dans les cellules voisines de la cellule
+    // représentée par les coordonnées données en argument
     private int countAliveNeighbours(int rowIndex, int columnIndex) {
-        return 0;
+        List<Cell> neighboursCells = getNeighbours(rowIndex,columnIndex);
+        int counter = 0;
+        for(Cell cell : neighboursCells){
+            if(cell.isAlive()){
+                counter++;
+            }
+        }
+        return counter;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
