@@ -116,9 +116,25 @@ public class Grid implements Iterable<Cell> {
         return counter;
     }
 
-    // TODO: Écrire une version correcte de cette méthode.
+    // la méthode calculateNextState() renvoie l'état suivant d'une cellule indiquée par les coordonnées données en argument
+    // en fonction du nombre de cellules voisines vivantes.
     private CellState calculateNextState(int rowIndex, int columnIndex) {
-        return null;
+        Cell actualCell = getCell(rowIndex,columnIndex);
+        int aliveNeighbourCells = countAliveNeighbours(rowIndex,columnIndex);
+
+        if(!actualCell.isAlive()){
+            if(aliveNeighbourCells == 3){
+                return CellState.ALIVE;
+            }
+            return CellState.DEAD;
+        }
+
+        if(actualCell.isAlive()){
+            if(aliveNeighbourCells == 2 || aliveNeighbourCells == 3){
+                return CellState.ALIVE;
+            }
+        }
+        return CellState.DEAD;
     }
 
 
