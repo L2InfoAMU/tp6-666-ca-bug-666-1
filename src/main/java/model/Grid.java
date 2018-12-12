@@ -139,15 +139,24 @@ public class Grid implements Iterable<Cell> {
 
 
 
-    // TODO: Écrire une version correcte de cette méthode.
+    // La méthode calculateNextStates() renvoie une matrice représentant les états suivants des cellules
     private CellState[][] calculateNextStates() {
         CellState[][] nextCellState = new CellState[getNumberOfRows()][getNumberOfColumns()];
+        for (int index1 = 0; index1 < getNumberOfRows() ; index1++) {
+            for (int index2 = 0; index2 < getNumberOfColumns() ; index2++) {
+                nextCellState[index1][index2] = calculateNextState(index1, index2);
+                }
+            }
         return nextCellState;
     }
 
-    // TODO: Écrire une version correcte de cette méthode.
+    //La méthode updtateStates met à jour les états des cellules de la grille en fonction de leur état suivant calculé.
     private void updateStates(CellState[][] nextState) {
-
+        for (int index1 = 0; index1 < getNumberOfRows() ; index1++) {
+            for (int index2 = 0; index2 < getNumberOfColumns() ; index2++) {
+                getCell(index1,index2).setState(nextState[index1][index2]);
+            }
+        }
     }
 
     /**
