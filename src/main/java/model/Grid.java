@@ -89,9 +89,17 @@ public class Grid implements Iterable<Cell> {
     }
 
 
-    // TODO: Écrire une version correcte de cette méthode.
     private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
-        return null;
+
+        List<Cell> neighboursCells = null;
+
+        for (int index1 = -1; index1 <=1 ; index1++) {
+            for (int index2 = -1; index2 <= 1; index2++) {
+                if(index1!=0 && index2!=0){
+               neighboursCells.add(getCell(rowIndex+index1,columnIndex+index2));}
+            }
+        }
+        return neighboursCells;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
