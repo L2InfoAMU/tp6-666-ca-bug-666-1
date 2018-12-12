@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -92,11 +93,11 @@ public class Grid implements Iterable<Cell> {
 
     private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
 
-        List<Cell> neighboursCells = null;
+        List<Cell> neighboursCells = new ArrayList<>();
 
         for (int index1 = -1; index1 <=1 ; index1++) {
             for (int index2 = -1; index2 <= 1; index2++) {
-                if(index1!=0 && index2!=0){
+                if(index1!=0 || index2!=0){
                neighboursCells.add(getCell(rowIndex+index1,columnIndex+index2));}
             }
         }
@@ -172,9 +173,11 @@ public class Grid implements Iterable<Cell> {
      * reproduction.</li>
      * </ul>
      */
-    // TODO: Écrire une version correcte de cette méthode.
-    void updateToNextGeneration() {
 
+    //Méthode updateToNextGeneration
+    void updateToNextGeneration() {
+        CellState[][] newStates = calculateNextStates();
+        updateStates(newStates);
     }
 
     /**
@@ -182,7 +185,9 @@ public class Grid implements Iterable<Cell> {
      */
     // TODO: Écrire une version correcte de cette méthode.
     void clear() {
-
+        for(Cell cell : this){
+            cell.setState(CellState.DEAD);
+        }
     }
 
     /**
@@ -192,7 +197,15 @@ public class Grid implements Iterable<Cell> {
      * @throws NullPointerException if {@code random} is {@code null}.
      */
     // TODO: Écrire une version correcte de cette méthode.
+
     void randomGeneration(Random random) {
+        Random randomno = new Random();
+
+        for(Cell cell : this){
+            if(randomno.nextBoolean()){
+                cell.setState(CellState.ALIVE);
+            }
+        }
 
     }
 }
